@@ -7,6 +7,8 @@ import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
+import butterknife.ButterKnife;
+
 /**
  * Created by catherine on 15/12/10.
  */
@@ -20,6 +22,7 @@ public abstract class BaseActivity extends FragmentActivity {
         activity=this;
         getArgs();
         setView();
+        ButterKnife.bind(this);
         initView();
         setListener();
         setComponent();
