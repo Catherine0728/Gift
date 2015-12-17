@@ -5,14 +5,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.catherine.gift.R;
+import com.example.catherine.gift.component.AppComponent;
+import com.example.catherine.gift.modules.WeatherModule;
 import com.example.catherine.gift.ui.base.BaseActivity;
 import com.example.catherine.gift.ui.p.WeatherP;
+import com.example.catherine.gift.utills.L;
 import com.jakewharton.rxbinding.view.RxView;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
-import rx.functions.Action1;
+import rx.Observer;
 
 public class MainActivity extends BaseActivity {
     @Bind(R.id.tv_name)
@@ -34,10 +37,21 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void initView() {
-        RxView.clicks(btnDot).subscribe(new Action1<Void>() {
+        RxView.clicks(btnDot).subscribe(new Observer<Void>() {
             @Override
-            public void call(Void aVoid) {
-                weatherP.getWeather("BEIJING","metric");
+            public void onCompleted() {
+              L.i("oncomplate");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                L.i("onerror＝＝＝＝"+e);
+            }
+
+            @Override
+            public void onNext(Void aVoid) {
+                weatherP.getWeather("BEIJING", "metric");
+
             }
         });
     }
@@ -49,7 +63,8 @@ public class MainActivity extends BaseActivity {
     }
 
     @Override
-    public void setComponent() {
+    public void setComponent(AppComponent appComponent) {
+       new WeatherModule();
     }
 
 }

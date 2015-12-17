@@ -7,6 +7,8 @@ import android.os.PersistableBundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
+import com.example.catherine.gift.component.AppComponent;
+
 import butterknife.ButterKnife;
 
 /**
@@ -15,6 +17,7 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends FragmentActivity {
     public Context context;
     public Activity activity;
+    AppComponent appComponent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,7 +28,7 @@ public abstract class BaseActivity extends FragmentActivity {
         ButterKnife.bind(this);
         initView();
         setListener();
-        setComponent();
+        setComponent(appComponent);
     }
 
     @Override
@@ -41,5 +44,5 @@ public abstract class BaseActivity extends FragmentActivity {
 
     public abstract void setListener();
 
-    public abstract void setComponent();
+    public abstract void setComponent(AppComponent appComponent);
 }
